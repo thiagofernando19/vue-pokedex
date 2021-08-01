@@ -18,8 +18,6 @@ export default {
 </script>
 
 <style lang="scss">
-.cls-loader {
-}
 .loader {
   background: #f7f7f7;
   text-align: center;

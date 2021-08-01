@@ -4,64 +4,107 @@
     transition="dialog-top-transition"
     @keydown.esc="closeDetail"
   >
-    <div class="dialog-detail-view card" v-if="show" @keydown.esc="closeDetail">
+    <div
+      v-if="show"
+      @keydown.esc="closeDetail"
+      :style="{ backgroundColor: pokemon.principalTypeColor }"
+    >
+      <div class="card-title">
+        <h1>{{ pokemon.name }}</h1>
+      </div>
       <div
-        v-if="pokemon"
-        class="image"
+        class="dialog-detail-view"
         :style="{ backgroundColor: pokemon.principalTypeColor }"
       >
-        <img :src="imageUrl + pokemon.id + '.png'" alt="" />
-      </div>
-      <div></div>
-      <div v-if="pokemon" class="data card-body">
-        <h2 class="card-title">{{ pokemon.name }}</h2>
-        <div class="property" style="margin-top: 15px">
-          <div class="left destaq">Experiência</div>
-          <div class="right">{{ pokemon.base_experience }} XP</div>
+        <div class="watermark">
+          <img src="../assets/pokeball-background.svg" alt="" />
+        </div>
+        <div v-if="pokemon" class="image">
+          <img
+            :src="imageUrl + 'other/dream-world/' + pokemon.id + '.svg'"
+            alt=""
+          />
         </div>
 
-        <div class="property">
-          <div class="left destaq">Altura</div>
-          <div class="right">{{ pokemon.height / 10 }} m</div>
-        </div>
-        <div class="property">
-          <div class="left destaq">Peso</div>
-          <div class="right">{{ pokemon.weight / 10 }} kg</div>
-        </div>
-        <h3>Tipo</h3>
-        <div class="types">
-          <div
-            class="type"
-            v-for="(value, index) in pokemon.types"
-            :key="'value' + index"
-          >
-            <span
-              :style="{
-                backgroundColor: getTypePokemon(value.type.name).color,
-              }"
+        <div v-if="pokemon" class="card-body">
+          <div class="types">
+            <div
+              class="type"
+              v-for="(value, index) in pokemon.types"
+              :key="'value' + index"
             >
-              {{ getTypePokemon(value.type.name).name }}
-            </span>
+              <span
+                :style="{
+                  backgroundColor: getTypePokemon(value.type.name).color,
+                }"
+              >
+                {{ getTypePokemon(value.type.name).name }}
+              </span>
+            </div>
           </div>
+          <h2 :style="{ color: pokemon.principalTypeColor }">Sobre</h2>
+          <div class="card-about">
+            <div class="property">
+              <div>
+                <p>
+                  <span style="font-weight: bold"> EXP </span>
+                  {{ pokemon.base_experience }}
+                </p>
+              </div>
+              <div style="text-align: center">
+                <p>Experiência</p>
+              </div>
+            </div>
+
+            <div class="property border-center">
+              <div>
+                <p>
+                  <span>
+                    <v-icon small color="#000"> mdi-scale-balance </v-icon>
+                  </span>
+                  {{ pokemon.weight / 10 }} kg
+                </p>
+              </div>
+              <div style="text-align: center">
+                <p>Altura</p>
+              </div>
+            </div>
+            <div class="property">
+              <div>
+                <p>
+                  <span>
+                    <v-icon small color="#000"> mdi-ruler </v-icon>
+                  </span>
+
+                  {{ pokemon.height / 10 }} m
+                </p>
+              </div>
+              <div style="text-align: center">
+                <p>Peso</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="abilities">
+            <h3>Habilidades</h3>
+            <div
+              class="ability"
+              v-for="(value, index) in pokemon.abilities"
+              :key="'value' + index"
+            >
+              {{ value.ability.name }}
+            </div>
+            <div class="right inactive">
+              {{ pokemon.moves.map((item) => " " + item.move.name).toString() }}
+              .
+            </div>
+          </div>
+          <button class="close" @click="closeDetail">Fechar</button>
         </div>
-        <h3>Habilidades</h3>
-        <div class="abilities">
-          <div
-            class="ability"
-            v-for="(value, index) in pokemon.abilities"
-            :key="'value' + index"
-          >
-            {{ value.ability.name }}
-          </div>
-          <div class="right inactive">
-            {{ pokemon.moves.map((item) => " " + item.move.name).toString() }} .
-          </div>
-        </div>
+        <h2 v-else>Pokemon não encontrado</h2>
       </div>
-      <h2 v-else>Pokemon não encontrado</h2>
-      <button class="close" @click="closeDetail">Fechar</button>
     </div>
-    <i v-else class="fas fa-spinner fa-spin"></i>
+    <div v-else class="fas fa-spinner fa-spin"></div>
   </div>
 </template>
 
@@ -210,43 +253,95 @@ i.fa-spinner {
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  padding: 80px 0 0;
+  padding: 10px 0 0;
   position: relative;
-
-  max-width: 500px;
+  height: 70vh;
+  min-width: 400px;
+  max-width: 400px;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 8px;
 }
+
+.watermark {
+  position: absolute;
+  height: 0;
+  opacity: 0.1;
+  top: -100px;
+  right: -0px;
+}
+.watermark img {
+  max-width: 260px;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+}
+
+.card-title {
+  display: flex;
+  margin-top: 15px;
+  margin-left: 15px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-transform: capitalize;
+  position: relative;
+}
+
+.card-title h1 {
+  color: #fff;
+}
+
 .image {
   display: flex;
-  justify-content: center;
+  top: 0px;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
-  top: -60px;
-  width: 120px;
-  height: 120px;
-  background-color: #ffcb04;
-  border-radius: 50%;
   overflow: hidden;
+}
+.image img {
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 h2 {
   text-transform: capitalize;
 }
 
-.data {
+.card-body {
+  background-color: #fff;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  margin-bottom: 40px;
+  width: 98%;
+  height: 95%;
+  margin-top: 100px;
+  margin-bottom: 5px;
+  padding-top: 25px;
+  border-radius: 8px;
+}
+.card-about {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
 }
 .property {
-  width: 90%;
-  max-width: 400px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 10px 10px;
+}
+.border-center {
+  border-left: 2px solid #e0e0e0;
+  border-right: 2px solid #e0e0e0;
 }
 .left {
   float: left;
@@ -260,29 +355,35 @@ h3 {
   border-bottom: 1px solid #ccc;
 }
 
-.types,
-.abilities {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 0 0 0px 0;
-  padding: 0px 30px;
-  width: 100%;
-  max-width: 400px;
-}
-.type {
-  margin: 15px 15px 15px 0px;
+.types {
+  margin: 30px 15px 20px 0px;
   padding: 0px 5px;
   font-weight: bold;
   font-size: 0.8rem;
   letter-spacing: 1px;
   text-transform: capitalize;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 11px;
 }
 .type span {
   color: #ffffff !important;
   padding: 10px 14px;
   border-radius: 29px;
+  margin-left: 15px;
 }
+.abilities {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 10px 0px 20px 50px;
+  padding: 0px 30px;
+  width: 100%;
+  max-width: 400px;
+}
+
 .ability {
   color: rgb(10, 119, 10);
   margin: 15px 10px 10px 0;
@@ -299,13 +400,12 @@ h3 {
 }
 
 .close {
-  outline: none;
   border: none;
   border-radius: 5px;
   background-color: #c73015;
   color: #efefef;
   padding: 10px 20px;
-  margin-bottom: 20px;
+
   font-size: 1.2rem;
   cursor: pointer;
 }
