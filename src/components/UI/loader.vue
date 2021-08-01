@@ -1,9 +1,8 @@
 <template>
-  <v-row align="center" justify="center" v-if="visible">
+  <v-row align="center" class="cls-loader" justify="center" v-if="visible">
     <v-row justify="center">
       <v-overlay :absolute="absolute" :value="visible">
-        <v-progress-circular :size="50" color="primary" indeterminate />
-        <v-row> carregando... </v-row>
+        <v-progress-circular :size="100" color="primary" indeterminate />
       </v-overlay>
     </v-row>
   </v-row>
@@ -19,6 +18,8 @@ export default {
 </script>
 
 <style lang="scss">
+.cls-loader {
+}
 .loader {
   background: #f7f7f7;
   text-align: center;

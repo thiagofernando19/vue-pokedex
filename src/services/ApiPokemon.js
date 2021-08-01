@@ -1,10 +1,10 @@
 import { httpsBase } from "./configApiPokemon";
 export default {
-  getNameUrlPokemon(currentUrl) {
-    if (!currentUrl) {
-      currentUrl = "pokemon/";
+  getNameUrlPokemon(nextUrl) {
+    if (!nextUrl) {
+      nextUrl = "pokemon?offset=0&limit=40";
     }
-    return httpsBase.get(currentUrl);
+    return httpsBase.get(nextUrl);
   },
 
   getDetailPokemon(codNamePokemon) {

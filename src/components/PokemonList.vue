@@ -1,21 +1,26 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row dense>
-      <v-flex
+      <v-col
         d-flex
         xs12
         sm6
-        md2
+        md="2"
         v-for="(pokemon, index) in pokemons"
         :key="'pokedex' + index"
       >
-        <v-card color="#FFFFFF" align="center" class="rounded-card">
+        <v-card
+          color="#FFFFFF"
+          align="center"
+          class="rounded-card"
+          :hover="true"
+          @click="setPokemonUrl(pokemon.url)"
+        >
           <img
             :src="imageUrl + pokemon.id + '.png'"
             width="96"
             height="96"
             :alt="'Nome pokemon: ' + pokemon.name"
-            @click="setPokemonUrl(pokemon.url)"
           />
           <div
             class="title-card"
@@ -24,7 +29,7 @@
             {{ pokemon.name }}
           </div>
         </v-card>
-      </v-flex>
+      </v-col>
 
       <div id="scroll-trigger" ref="infinitescrolltrigger"></div>
     </v-layout>

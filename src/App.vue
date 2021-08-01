@@ -6,8 +6,8 @@
   </div>
 </template>
 <script>
-import Nav from "./components/Nav";
 import Loader from "@/components/UI/loader";
+import Nav from "./components/Nav";
 import { mapState } from "vuex";
 export default {
   name: "App",
@@ -22,7 +22,9 @@ export default {
 };
 </script>
 <style>
-#app {
+html,
+body {
   background: #f7f7f7;
+  min-height: 100vh;
 }
 </style>
