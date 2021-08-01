@@ -256,7 +256,7 @@ i.fa-spinner {
   padding: 10px 0 0;
   position: relative;
   height: 70vh;
-  min-width: 400px;
+  min-width: 350px;
   max-width: 400px;
   background-color: #fff;
   border-radius: 8px;

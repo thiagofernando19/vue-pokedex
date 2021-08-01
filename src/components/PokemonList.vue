@@ -1,11 +1,11 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row dense>
-      <v-col
+      <v-flex
         d-flex
-        xs12
+        xs6
         sm6
-        md="2"
+        md2
         v-for="(pokemon, index) in pokemons"
         :key="'pokedex' + index"
       >
@@ -29,7 +29,7 @@
             {{ pokemon.name }}
           </div>
         </v-card>
-      </v-col>
+      </v-flex>
 
       <div id="scroll-trigger" ref="infinitescrolltrigger"></div>
     </v-layout>
