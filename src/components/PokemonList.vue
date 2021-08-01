@@ -25,9 +25,8 @@
           </div>
         </v-card>
       </v-flex>
-      <div id="scroll-trigger" ref="infinitescrolltrigger">
-        <i class="fas fa-spinner fa-spin"></i>
-      </div>
+
+      <div id="scroll-trigger" ref="infinitescrolltrigger"></div>
     </v-layout>
   </v-container>
 </template>
@@ -124,9 +123,7 @@ export default {
   },
 
   beforeMount() {
-    setTimeout(() => {
-      this.getListBasicDetail();
-    }, 1500);
+    this.getListBasicDetail();
   },
 
   methods: {
@@ -148,17 +145,16 @@ export default {
         entries.forEach((entry) => {
           if (entry.intersectionRatio > 0) {
             this.next();
+            this.getListBasicDetail();
           }
         });
       });
 
       observer.observe(this.$refs.infinitescrolltrigger);
     },
-    next() {
-      this.getListOfPokemon();
-      setTimeout(() => {
-        this.getListBasicDetail();
-      }, 100);
+    async next() {
+      await this.getListOfPokemon();
+      this.getListBasicDetail();
     },
     setPokemonUrl(url) {
       this.$emit("setPokemonUrl", url);

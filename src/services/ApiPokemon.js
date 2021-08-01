@@ -1,13 +1,13 @@
-import { base } from "./configApiPokemon";
+import { httpsBase } from "./configApiPokemon";
 export default {
   getNameUrlPokemon(currentUrl) {
     if (!currentUrl) {
       currentUrl = "pokemon/";
     }
-    return base.get(currentUrl);
+    return httpsBase.get(currentUrl);
   },
 
   getDetailPokemon(codNamePokemon) {
-    return base.get("pokemon/" + codNamePokemon);
+    return httpsBase.get("pokemon/" + codNamePokemon);
   },
 };

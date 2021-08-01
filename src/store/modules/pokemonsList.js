@@ -28,12 +28,13 @@ export const actions = {
       const responsePokemon = await apiPokemon.getNameUrlPokemon(
         state.next_url
       );
-      const listPokemon = await responsePokemon.data.results;
+
+      const listPokemon = await responsePokemon.results;
 
       const listPokemonDetails = await Promise.all(
         listPokemon.map(async (pokemon) => {
           const response = await apiPokemon.getDetailPokemon(pokemon.name);
-          return response.data;
+          return response;
         })
       );
 
@@ -51,11 +52,11 @@ export const actions = {
         )
       );
 
-      commit("SET_NEXT_URL", responsePokemon.data.next);
+      commit("SET_NEXT_URL", responsePokemon.next);
       commit("SET_POKEMON", unionResults);
     } catch (error) {
-      console.error(error);
-      throw error;
+      // console.error(error);
+      // throw error;
     }
   },
 };
