@@ -87,12 +87,6 @@
                 >
                   {{ value.ability.name }}
                 </div>
-                <div class="right inactive">
-                  {{
-                    pokemon.moves.map((item) => " " + item.move.name).toString()
-                  }}
-                  .
-                </div>
               </div>
               <button class="close" @click="closeDetail">Fechar</button>
             </div>
@@ -283,6 +277,7 @@ i.fa-spinner {
 .card-title {
   display: flex;
   margin-top: 15px;
+  padding-top: 15px;
   margin-left: 15px;
   align-items: flex-start;
   justify-content: flex-start;
@@ -341,7 +336,7 @@ h2 {
 .property {
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 0px 10px;
 }
 .border-center {
   border-left: 2px solid #e0e0e0;
@@ -363,7 +358,7 @@ h3 {
   margin: 30px 15px 20px 0px;
   padding: 0px 5px;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   letter-spacing: 1px;
   text-transform: capitalize;
   display: flex;
@@ -382,7 +377,7 @@ h3 {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin: 10px 0px 20px 50px;
+  margin: 10px 0px 0px 50px;
   padding: 0px 30px;
   width: 100%;
   max-width: 400px;
@@ -394,7 +389,7 @@ h3 {
   border-radius: 20px;
   padding: 5px 10px;
   font-weight: bold;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   letter-spacing: 1px;
   text-transform: capitalize;
   word-wrap: none;
@@ -410,7 +405,7 @@ h3 {
   color: #efefef;
   padding: 10px 20px;
 
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 i {

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-col class="div-search">
       <v-row class="title">
         <p>Qual Pokemon você esta procurando?</p>
@@ -38,6 +38,7 @@ export default {
   background-color: #fa6555;
   padding: 30px 50px 20px 20px;
   width: 100%;
+  border-radius: 10px;
 }
 .div-search p {
   color: #fff;
@@ -51,7 +52,7 @@ export default {
   outline: none;
   margin: 10px;
   background: #fff;
-  border-radius: 5px;
+  border-radius: 15px;
   padding: 10px 40px 10px 10px;
   width: calc(100% - 50px);
   font-size: 1rem;
