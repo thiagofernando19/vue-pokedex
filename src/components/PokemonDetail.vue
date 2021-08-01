@@ -1,110 +1,111 @@
 <template>
-  <div
-    class="dialog-detail"
-    transition="dialog-top-transition"
-    @keydown.esc="closeDetail"
-  >
-    <div
-      v-if="show"
-      @keydown.esc="closeDetail"
-      :style="{ backgroundColor: pokemon.principalTypeColor }"
-    >
-      <div class="card-title">
-        <h1>{{ pokemon.name }}</h1>
+  <div class="dialog-detail" transition="dialog-top-transition">
+    <div v-if="show">
+      <div v-if="pokemon">
+        <div :style="{ backgroundColor: pokemon.principalTypeColor }">
+          <div class="card-title">
+            <h1>{{ pokemon.name }}</h1>
+          </div>
+          <div
+            class="dialog-detail-view"
+            :style="{ backgroundColor: pokemon.principalTypeColor }"
+          >
+            <div class="watermark">
+              <img src="../assets/pokeball-background.svg" alt="" />
+            </div>
+            <div class="image">
+              <img
+                :src="imageUrl + 'other/dream-world/' + pokemon.id + '.svg'"
+                alt=""
+              />
+            </div>
+
+            <div class="card-body">
+              <div class="types">
+                <div
+                  class="type"
+                  v-for="(value, index) in pokemon.types"
+                  :key="'value' + index"
+                >
+                  <span
+                    :style="{
+                      backgroundColor: getTypePokemon(value.type.name).color,
+                    }"
+                  >
+                    {{ getTypePokemon(value.type.name).name }}
+                  </span>
+                </div>
+              </div>
+              <h2 :style="{ color: pokemon.principalTypeColor }">Sobre</h2>
+              <div class="card-about">
+                <div class="property">
+                  <div>
+                    <div style="text-align: center">
+                      <p>Experiência</p>
+                    </div>
+                    <p>
+                      <span style="font-weight: bold"> EXP </span>
+                      {{ pokemon.base_experience }}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="property border-center">
+                  <div style="text-align: center">
+                    <p>Altura</p>
+                  </div>
+                  <div>
+                    <p>
+                      <span>
+                        <v-icon small color="#000"> mdi-scale-balance </v-icon>
+                      </span>
+                      {{ pokemon.height / 10 }} m
+                    </p>
+                  </div>
+                </div>
+                <div class="property">
+                  <div style="text-align: center">
+                    <p>Peso</p>
+                  </div>
+                  <div>
+                    <p>
+                      <span>
+                        <v-icon small color="#000"> mdi-ruler </v-icon>
+                      </span>
+                      {{ pokemon.weight / 10 }} kg
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="abilities">
+                <h3>Habilidades</h3>
+                <div
+                  class="ability"
+                  v-for="(value, index) in pokemon.abilities"
+                  :key="'value' + index"
+                >
+                  {{ value.ability.name }}
+                </div>
+                <div class="right inactive">
+                  {{
+                    pokemon.moves.map((item) => " " + item.move.name).toString()
+                  }}
+                  .
+                </div>
+              </div>
+              <button class="close" @click="closeDetail">Fechar</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div
-        class="dialog-detail-view"
-        :style="{ backgroundColor: pokemon.principalTypeColor }"
-      >
-        <div class="watermark">
-          <img src="../assets/pokeball-background.svg" alt="" />
+      <div v-else class="dialog-detail-view">
+        <div style="margin: 20px">
+          <h2>Pokemon não encontrado!</h2>
         </div>
-        <div v-if="pokemon" class="image">
-          <img
-            :src="imageUrl + 'other/dream-world/' + pokemon.id + '.svg'"
-            alt=""
-          />
-        </div>
-
-        <div v-if="pokemon" class="card-body">
-          <div class="types">
-            <div
-              class="type"
-              v-for="(value, index) in pokemon.types"
-              :key="'value' + index"
-            >
-              <span
-                :style="{
-                  backgroundColor: getTypePokemon(value.type.name).color,
-                }"
-              >
-                {{ getTypePokemon(value.type.name).name }}
-              </span>
-            </div>
-          </div>
-          <h2 :style="{ color: pokemon.principalTypeColor }">Sobre</h2>
-          <div class="card-about">
-            <div class="property">
-              <div>
-                <p>
-                  <span style="font-weight: bold"> EXP </span>
-                  {{ pokemon.base_experience }}
-                </p>
-              </div>
-              <div style="text-align: center">
-                <p>Experiência</p>
-              </div>
-            </div>
-
-            <div class="property border-center">
-              <div>
-                <p>
-                  <span>
-                    <v-icon small color="#000"> mdi-scale-balance </v-icon>
-                  </span>
-                  {{ pokemon.weight / 10 }} kg
-                </p>
-              </div>
-              <div style="text-align: center">
-                <p>Altura</p>
-              </div>
-            </div>
-            <div class="property">
-              <div>
-                <p>
-                  <span>
-                    <v-icon small color="#000"> mdi-ruler </v-icon>
-                  </span>
-
-                  {{ pokemon.height / 10 }} m
-                </p>
-              </div>
-              <div style="text-align: center">
-                <p>Peso</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="abilities">
-            <h3>Habilidades</h3>
-            <div
-              class="ability"
-              v-for="(value, index) in pokemon.abilities"
-              :key="'value' + index"
-            >
-              {{ value.ability.name }}
-            </div>
-            <div class="right inactive">
-              {{ pokemon.moves.map((item) => " " + item.move.name).toString() }}
-              .
-            </div>
-          </div>
-          <button class="close" @click="closeDetail">Fechar</button>
-        </div>
-        <h2 v-else>Pokemon não encontrado</h2>
+        <button class="close" @click="closeDetail">Fechar</button>
       </div>
     </div>
-    <div v-else class="fas fa-spinner fa-spin"></div>
   </div>
 </template>
 
@@ -201,21 +202,23 @@ export default {
   },
   methods: {
     fetchData() {
-      let req = new Request(this.pokemonUrl);
+      let req = new Request(this.pokemonUrl.toLowerCase());
       fetch(req)
         .then((resp) => {
           if (resp.status === 200) return resp.json();
+          else return "";
         })
         .then((data) => {
-          data["principalTypeColor"] = this.getTypePokemon(
-            data.types[0].type.name
-          ).color;
-
+          if (data) {
+            data["principalTypeColor"] = this.getTypePokemon(
+              data.types[0].type.name
+            ).color;
+          }
           this.pokemon = data;
           this.show = true;
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     },
     closeDetail() {
@@ -235,6 +238,7 @@ export default {
 i.fa-spinner {
   text-align: center;
 }
+
 .dialog-detail {
   display: flex;
   justify-content: center;
@@ -266,12 +270,12 @@ i.fa-spinner {
   position: absolute;
   height: 0;
   opacity: 0.1;
-  top: -100px;
+  top: -85px;
   right: -0px;
 }
 .watermark img {
-  max-width: 260px;
-  max-height: 260px;
+  max-width: 240px;
+  max-height: 240px;
   width: auto;
   height: auto;
 }

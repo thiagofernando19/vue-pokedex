@@ -16,14 +16,12 @@ export const mutations = {
 
 export const getters = {
   listPokemons(state) {
-    console.log("getter");
     return state.pokemon;
   },
 };
 
 export const actions = {
   async getListOfPokemon({ commit }) {
-    console.log("actions");
     try {
       const responsePokemon = await apiPokemon.getNameUrlPokemon(
         state.next_url

@@ -1,7 +1,13 @@
 <template>
-  <v-row align="center" class="cls-loader" justify="center" v-if="visible">
+  <v-row
+    absolute
+    align="center"
+    class="cls-loader"
+    justify="center"
+    v-if="visible"
+  >
     <v-row justify="center">
-      <v-overlay :absolute="absolute" :value="visible">
+      <v-overlay :absolute="absolute" :value="visible" :z-index="5">
         <v-progress-circular :size="100" color="primary" indeterminate />
       </v-overlay>
     </v-row>
