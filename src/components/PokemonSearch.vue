@@ -2,7 +2,7 @@
   <v-container>
     <v-col class="div-search">
       <v-row class="title">
-        <p>Qual Pokemon você esta procurando?</p>
+        <p>Qual Pokemon você está procurando?</p>
       </v-row>
       <form @submit.prevent="setPokemonUrl">
         <input
@@ -39,6 +39,7 @@ export default {
   padding: 30px 50px 20px 20px;
   width: 100%;
   border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 0px 0px rgba(0, 0, 0, 0.2);
 }
 .div-search p {
   color: #fff;
