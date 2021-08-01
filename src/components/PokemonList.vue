@@ -9,29 +9,21 @@
         v-for="(pokemon, index) in pokemons"
         :key="'pokedex' + index"
       >
-        <v-hover v-slot="{ hover }" close-delay="103" open-delay="200">
-          <v-card
-            :elevation="hover ? 16 : 2"
-            :class="{ 'on-hover': hover }"
-            color="#FFFFFF"
-            align="center"
-            class="rounded-card"
+        <v-card color="#FFFFFF" align="center" class="rounded-card">
+          <img
+            :src="imageUrl + pokemon.id + '.png'"
+            width="96"
+            height="96"
+            :alt="'Nome pokemon: ' + pokemon.name"
+            @click="setPokemonUrl(pokemon.url)"
+          />
+          <div
+            class="title-card"
+            :style="{ backgroundColor: pokemon.ObjType.color }"
           >
-            <img
-              :src="imageUrl + pokemon.id + '.png'"
-              width="96"
-              height="96"
-              :alt="'Nome pokemon: ' + pokemon.name"
-              @click="setPokemonUrl(pokemon.url)"
-            />
-            <div
-              class="title-card"
-              :style="{ backgroundColor: pokemon.ObjType.color }"
-            >
-              {{ pokemon.name }}
-            </div>
-          </v-card>
-        </v-hover>
+            {{ pokemon.name }}
+          </div>
+        </v-card>
       </v-flex>
       <div id="scroll-trigger" ref="infinitescrolltrigger">
         <i class="fas fa-spinner fa-spin"></i>
