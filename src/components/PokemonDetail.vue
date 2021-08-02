@@ -57,7 +57,7 @@
                   <div>
                     <p>
                       <span>
-                        <v-icon small color="#000"> mdi-scale-balance </v-icon>
+                        <v-icon small color="#000"> mdi-ruler </v-icon>
                       </span>
                       {{ pokemon.height / 10 }} m
                     </p>
@@ -70,7 +70,7 @@
                   <div>
                     <p>
                       <span>
-                        <v-icon small color="#000"> mdi-ruler </v-icon>
+                        <v-icon small color="#000"> mdi-scale-balance </v-icon>
                       </span>
                       {{ pokemon.weight / 10 }} kg
                     </p>
